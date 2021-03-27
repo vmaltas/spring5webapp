@@ -9,9 +9,11 @@ import guru.springframework.spring5webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * Created by jt on 12/23/19.
+ */
 @Component
 public class BootStrapData implements CommandLineRunner {
-
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
@@ -29,25 +31,27 @@ public class BootStrapData implements CommandLineRunner {
         Publisher ithaki = new Publisher("ithaki", "Kizilay", "Ankara", "TR", "052341");
         publisherRepository.save(ithaki);
 
-        Author jrrr = new Author("JRRR", "Tolkien");
-        Book lotr = new Book("LOTR", "123");
-        jrrr.getBooks().add(lotr);
-        lotr.getAuthors().add(jrrr);
+        Author eric = new Author("Eric", "Evans");
+        Book ddd = new Book("Domain Driven Design", "123123");
+        eric.getBooks().add(ddd);
+        ddd.getAuthors().add(eric);
 
-        authorRepository.save(jrrr);
-        bookRepository.save(lotr);
+        authorRepository.save(eric);
+        bookRepository.save(ddd);
 
-        Author neil = new Author("Neil", "Gailman");
-        Book sandman = new Book("Sandman", "456");
-        neil.getBooks().add(sandman);
-        sandman.getAuthors().add(neil);
+        ithaki.getBooks().add(ddd);
+        publisherRepository.save(ithaki);
 
-        authorRepository.save(neil);
-        bookRepository.save(sandman);
+        Author rod = new Author("Eric", "Johnson");
+        Book noEJB = new Book("J2EE Development without EJB", "3939459459");
+        rod.getBooks().add(noEJB);
+        noEJB.getAuthors().add(rod);
 
-        System.out.println("Server Started");
-        System.out.println("Number of books" + bookRepository.count());
+        authorRepository.save(rod);
+        bookRepository.save(noEJB);
 
-
+        System.out.println("Started in Bootstrap");
+        System.out.println("Number of Books: " + bookRepository.count());
+        System.out.println("Number of Publishers: " + ithaki.getBooks().size());
     }
 }
